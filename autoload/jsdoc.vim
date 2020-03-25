@@ -33,6 +33,10 @@ let g:jsdoc_user_defined_tags = exists('g:jsdoc_user_defined_tags')
       \ ? g:jsdoc_user_defined_tags
       \ : {}
 
+let g:jsdoc_user_defined_tags_dy = exists('g:jsdoc_user_defined_tags_dy')
+      \ ? g:jsdoc_user_defined_tags_dy
+      \ : {}
+
 " Default tag names
 "   @returns      (synonyms: @return)
 "   @function     (synonyms: @func, @method)
@@ -446,6 +450,12 @@ function! jsdoc#insert() abort
     for t in keys(g:jsdoc_user_defined_tags)
       call add(l:lines, l:space . ' * ' . t . ' ' . g:jsdoc_user_defined_tags[t])
     endfor
+
+    " Add user defined dynamically generated tags.
+    for t in keys(g:jsdoc_user_defined_tags_dy)
+      call add(l:lines, l:space . ' * ' . '@' . t . ' ' . g:jsdoc_user_defined_tags_dy[t]())
+    endfor
+
 
     let l:hook = keys(g:jsdoc_custom_args_hook)
     for l:arg in l:args

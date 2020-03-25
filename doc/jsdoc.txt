@@ -281,6 +281,9 @@ g:jsdoc_user_defined_tags			*g:jsdoc_user_defined_tags*
 		Allow use of insert custom tags.
 		Default value is '{}'
 
+		Return value of funtion calls would be settled as soon as vim
+		is opened so the timestamp below is static
+
 		If you set following setting to .vimrc or _vimrc.
 >
 		let g:jsdoc_user_defined_tags = {
@@ -293,6 +296,29 @@ g:jsdoc_user_defined_tags			*g:jsdoc_user_defined_tags*
 		 *
 		 * @author Foo
 		 * @date 2016-09-11
+		 * @param {} arg1
+		 * @param {} arg2
+		 */
+		function foo(arg1, arg2) {
+		}
+
+g:jsdoc_user_defined_tags_dy			*g:jsdoc_user_defined_tags_dy*
+		Allow use of insert custom tags using functions return value as output.
+		Default value is '{}'
+
+		If you set following setting to .vimrc or _vimrc.
+>
+		let jsdoc_timestamp_dict = {}
+		function jsdoc_timestamp_dict.date()
+		  return strftime('%Y-%m-%d')
+		endfunction
+		let g:jsdoc_user_defined_tags_dy = jsdoc_timestamp_dict
+>
+		/**
+		 * foo
+		 *
+		 * @author Foo
+		 * @date 2020-03-25
 		 * @param {} arg1
 		 * @param {} arg2
 		 */

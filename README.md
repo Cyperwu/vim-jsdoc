@@ -1,5 +1,28 @@
 jsdoc.vim
 =========
+## Specification
+The original `jsdoc.vim` does not support dynamically generated documentation like timestamps, so I added a new option `g:jsdoc_user_defined_tags_dy` to support it.
+
+For example, the `@date` below will always be the same as the time when I opened vim using the original `jsdoc.vim`: 
+``` viml
+let g:jsdoc_user_defined_tags = {
+      \ '@author': 'Cyper',
+      \ '@date': strftime('%c'),
+      \}
+```
+
+Using the new option `g:jsdoc_user_defined_tags_dy`, things will be more flexible:
+``` viml
+let jsdoc_timestamp_dict = {}
+function jsdoc_timestamp_dict.date()
+  return strftime('%c')
+endfunction
+let g:jsdoc_user_defined_tags_dy = jsdoc_timestamp_dict
+```
+
+An '@' will be prepended to `date` automagically to conform to the original format.
+
+## Original README
 
 [![Build Status](https://travis-ci.org/heavenshell/vim-jsdoc.svg?branch=master)](https://travis-ci.org/heavenshell/vim-jsdoc)
 
